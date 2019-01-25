@@ -1,3 +1,20 @@
-area:hover{
-    border: 1px solid blue;
+
+
+table th{
+    font-size: 20px ;
+    font-weight: bold;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+  }
+  th, td{
+      padding: 10px 20px;
+  }
+  th, td:hover{
+      background-color: #8c8a8a;
 }
