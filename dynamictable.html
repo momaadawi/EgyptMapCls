@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Table .</Table></title>
+    <link href="/EgyptMapCls/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+ 
+    <style>
+      body{
+        color: white;
+        background-color:rgb(35, 74, 130);
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        justify-items: center;
+        align-items: center;  
+      }
+      .form-data{
+        grid-row: 2/auto;
+        grid-column: 2/auto;
+      }
+      .table-data{
+        grid-row: 2/auto;
+        grid-column: 3/auto;
+      }
+
+    </style>
+
+  </head>
+  <body>
+  
+   
+     <div class="form-data">
+        <form method="dialog" role="form">
+            <input type="number" name="Id" class="id" id="idNumber" required="required"  min="1" placeholder="Enter Id" title="Please insert Id number eg:123">
+               <label id="id-label" name="id-label"></label>
+             <input type="text" name="name" class="name" id="name" required="required" placeholder="Enter Name" title="Please insert  Your Name eg:ahmed">
+               <label id="name-label" name="name-label"></label>
+             <input type="number" name="salary" id="salary" class="salary" min="1"  required="required" placeholder="Enter salary" pattern="[A-z]" title="Please insert  Your Salary eg:1500">
+               <label id="salary-label" name="salary-label"></label>
+               <input type="button" value="Send" id="btn-send" onclick="sendData()" accesskey="[enter]">
+     </div>
+     </form>
+     <div class="table-data">
+        <table id="table-data">
+            <thead>
+              <tr><th>Id</th><th>Name</th><th>Salary</th></tr>
+              <tbody>
+                <tr><td>1</td><td>ahmed</td><td>1500</td></tr>
+              </tbody>
+            </thead>
+          </table>
+     </div>
+
+    <script>
+      function sendData(){
+      var table = document.getElementById("table-data");
+      var row = table.insertRow();
+      var idCell = row.insertCell(0);
+      var nameCell = row.insertCell(1);
+      var salaryCell = row.insertCell(2);
+
+       idCell.innerHTML = document.getElementById("idNumber").value;
+       nameCell.innerHTML = document.getElementById("name").value;
+       salaryCell.innerHTML = document.getElementById("salary").value;
+
+      
+      }
+    </script>
+  </body>
+</html>

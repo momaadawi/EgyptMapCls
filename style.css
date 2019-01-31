@@ -1,20 +1,72 @@
 
 
+form{
+    position: relative;
+    
+    display: flex;
+    justify-content:flex-start;
+    align-items: center;
+    flex-direction: column;
+    border-radius: .3em;
+    background-image: linear-gradient(rgb(42, 33, 175), #5c1bf7);
+    height: 400px;
+    width: 300px;
+    margin: 10px;
+    
+  }
+   #idNumber,#salary,#name
+  {
+    
+    color: rgb(22, 20, 20);
+    padding: 5px 10px;
+    border: none;
+    margin: 2em  10px;
+    border-radius: 2px;
+    display: block;
+   width: 200px;
+   height: 2em;
+  }
+  form #btn-send {
+    color: azure;
+    border: none;
+    width: 70px;
+    height: 30px;
+    background-color: #1b90f7;
+    border-radius: 3px;
+   font-size: 1em;
+   font-style: arial;
+   letter-spacing: 2px;
+  
+  }form #btn-send:hover{
+    background-color: #43a4f9;
+    cursor: pointer;
+  }
+  
 table th{
-    font-size: 20px ;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em ;
     font-weight: bold;
 }
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #1b90f7;
+
   }
-  table, th, td {
-    border: 1px solid black;
+  
+  table,  td {
+    border-top: 1px solid #8ca5cc;
+    border-bottom: 1px solid #8ca5cc;
+    border-left: 1px dotted #8ca5cc;
+    border-right: 1px dotted #8ca5cc;
     border-collapse: collapse;
     text-align: center;
   }
+ 
   th, td{
-      padding: 10px 20px;
+      transition: .2s linear;
+      padding: 5px 10px;
   }
-  th, td:hover{
-      background-color: #8c8a8a;
+   td:hover{
+      background-color: #92befc;
+      transition-duration: 0ms;
+     
 }
