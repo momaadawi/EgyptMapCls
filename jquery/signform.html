@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>login Form</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                
+                $("input").attr("required","required");
+               
+                $("#flixable-form").hide(); 
+                $("#select-shift").click(function(){
+
+                    if($("#select-shift").val() == 1)
+                    {
+                        $("#straight-form").show();
+                        $("#flixable-form").hide(); 
+                    }
+                    if($("#select-shift").val() == 2)
+                    {
+                        $("#straight-form").hide();
+                        $("#flixable-form").show(); 
+                    }
+                   
+                });
+                           
+            
+
+            });
+        </script>
+        <style>
+            main{
+                
+                background-color: aliceblue;
+                border: 1px solid rgb(204, 204, 204);
+                border-radius: 5px;
+                height: 100%;
+                margin:0 auto;
+            }
+            #Login-form{
+                width: 100%;    
+            }
+            *{
+               padding: 5px 10px;
+                margin: 10px ;
+                font-family: Verdana, Geneva, Tahoma, sans-serif;
+            }
+            fieldset{
+                border: 1px solid gainsboro;
+                border-radius: 5px; 
+                width: 50%;
+                height: max-content;
+            }
+            input[type="submit"]{
+                font-size: 1em;
+                float: right;
+ 
+            }
+            input:valid{
+              border:1px solid rgb(69, 100, 6);
+               
+            }
+           
+            input:required::after
+            {
+                content: "*";
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+
+               
+                <form id="Login-form" method="GET" action="/login-suc.html">
+
+                    <span>Shift Type : </span>
+                    <select id="select-shift">
+                        <option id="straight" value="1" class="shift-type">Straight</option>
+                        <option id="flixable" value="2" class="shift-type">Flixable</option>
+                    </select>
+
+                    <form   method="GET" action="/login-suc.html">
+                        <fieldset id="straight-form">
+                                <legend>Straight</legend>
+                                <label for="s-start-time">Shift Form</label>
+                                <input type="time" value="hh:mm" id="s-start-time">
+                                <span>To</span><input type="time" value="hh:mm" id="s-end-time"></br>
+                                <label for="s-break-time">Break From</label>
+                                <input type="time" value="hh:mm" id="s-break-time">
+                                <span>To</span><input type="time" value="hh:mm" id="s-end-time"></br>      
+                            <input type="submit" value="Save"  >
+                        </fieldset> 
+                     </form>
+        
+                    <form   action="/login-suc.html" method="GET">
+                        <fieldset id="flixable-form">
+                            <legend>Flixable</legend>
+                            <label for="s-start-time">Early In</label>
+                            <input type="time" value="hh:mm" id="s-start-time">
+                            <span>To</span><input type="time" value="hh:mm" id="s-end-time">
+                        </br>
+                            <label for="s-break-time">Late In</label>
+                            <input type="time" value="hh:mm" id="s-start-time">
+                            <span>To</span><input type="time" value="hh:mm" id="s-end-time">
+                        </br>
+                            <label for="break-duration">Break Duration</label><input type="time" value="HH" id="break-duration">
+                            <input type="submit" value="Save"  >
+                        </fieldset> 
+                    </form>
+                    
+                </form>
+        </main>
+       
+        
+        
+    </body>
+</html>

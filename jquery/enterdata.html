@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>.....</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 50px;
+            left: 100px;
+        }
+
+        * {
+            padding: 5px 10px;
+            margin: 10px;
+            font-family: 'Montserrat', sans-serif;
+
+        }
+
+        main {
+            display: flex;
+            flex-flow: row wrap;
+        }
+
+        /*------------------------------Form Styling--------------------------------*/
+        #data-entery {
+            width: max-content;
+            height: max-content;
+            display: flex;
+            flex-flow: row wrap;
+            border: 1px solid rgb(112, 112, 112);
+        }
+
+        #data-entery input {
+            width: max-content;
+        }
+
+
+        input[type='button'] {
+            cursor: pointer;
+            background-color: rgb(241, 241, 241);
+            border-radius: 2px;
+            box-shadow: none;
+            border: 1px solid rgb(182, 182, 182);
+        }
+
+        input[type='button']:hover {
+            background-color: rgb(231, 231, 231);
+        }
+
+        /*----------------------Table Styling -------------------------------------*/
+        table {
+            border: 1px solid rgb(179, 179, 179);
+            border-collapse: collapse;
+
+        }
+
+        thead {
+            border-bottom: 1px solid rgb(179, 179, 179);
+        }
+
+        thead tr {
+            border: none;
+        }
+
+        tbody tr {
+            border: 1px dotted rgb(197, 197, 197);
+            width: max-content;
+        }
+
+        tbody tr input[type="text"] {
+            width: fit-content;
+
+        }
+    </style>
+    <script>
+
+        $(function () {
+            /*add button to append values into table*/
+            $('#btn-add-data').click(function () {
+
+                var id = $('#text-id').val();
+                var name = $('#text-name').val();
+                var salary = $('#text-salary').val();
+
+                $('#table-data').append('<tr><td>' + id + '</td><td class="name">' + name + '</td><td class="salary">' + salary + '</td><td><input type="button" class="btn-edit" value="Edit"></td><td><input type="button" class="btn-delete" value="Delete"></td></tr>');
+
+            });
+
+            /*display button to append values into new Table*/
+            $('main').on('click', '#btn-display-data', function () {
+
+                var textName = $('.name').text();
+                var textSalary = $('.salary').text();
+
+                $('#table-names').each(function (index, element) {
+                    $(this).each(function (i, e) {
+                        $('#table-names').append('<tr><td>' + textName + '</td><td>' + textSalary + '</td></tr>');
+
+                    });
+                });
+
+
+            });
+
+            /* Delete button ------, edit btn to Save and return edited value to row*/
+
+            /*Delete Button to remove the it's row */
+            $('#table-data').on('click', '.btn-delete', function () {
+
+                $(this).closest('tr').remove();
+
+            });
+
+            /* 1 ) edit button*/
+            $('#table-data').on('click', '.btn-edit', function () {
+
+                /*old values to send to Text Box*/
+                var oldId = $(this).parent().closest('tr').children('td:nth-child(1)').text();
+                var oldName = $(this).parent().closest('tr').children('td:nth-child(2)').text();
+                var oldSalary = $(this).parent().closest('tr').children('td:nth-child(3)').text();
+
+                /* convert row to text box to edit */
+                $(this).parent().closest('tr').children('td:nth-child(1)').replaceWith('<td><input type="text" value="' + oldId + '" class="text-id-edit" /></td>');
+                $(this).parent().closest('tr').children('td:nth-child(2)').replaceWith('<td><input type="text" value="' + oldName + '" class="text-id-edit"/></td>');
+                $(this).parent().closest('tr').children('td:nth-child(3)').replaceWith('<td><input type="text" value="' + oldSalary + '" class="text-id-edit"/></td>');
+
+                /* convert btn edit to btn save*/
+                $(this).addClass('btn-save');
+                $(this).val('Save');
+                $(this).removeClass('btn-edit')
+
+
+
+            });
+            /* 2) Save button   */
+            $('#table-data').on('click', '.btn-save', function () {
+
+                /* get new values  */
+                var newId = $(this).parent().closest('tr').children('td:nth-child(1)').find('input').val();
+                var newName = $(this).parent().closest('tr').children('td:nth-child(2)').find('input').val();
+                var newSalary = $(this).parent().closest('tr').children('td:nth-child(3)').find('input').val();
+
+                /* return edited values in text box to rows*/
+                $(this).parent().closest('tr').children('td:nth-child(1)').replaceWith('<td>' + newId + '</td>');
+                $(this).parent().closest('tr').children('td:nth-child(2)').replaceWith('<td>' + newName + '</td>');
+                $(this).parent().closest('tr').children('td:nth-child(3)').replaceWith('<td>' + newSalary + '</td>');
+
+
+
+                /* return btn save to btn edit*/
+                $(this).addClass('btn-edit');
+                $(this).val('Edit');
+                $(this).removeClass('btn-save')
+
+
+
+            });
+
+
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <main>
+
+        <form id="data-entery">
+            <label for="text-id">Id : </label> <input type="number" id="text-id" class="data-entery">
+            <br />
+            <label for="text-name">Name : </label> <input type="text" id="text-name" class="data-entery">
+            <br />
+            <label for="text-salary">Salary : </label> <input type="number" id="text-salary" class="data-entery">
+            <br />
+            <input type="button" id="btn-add-data" value="Add" />
+            <input type="button" id="btn-display-data" value="display" />
+        </form>
+        <table id="table-data">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Salary</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            <tbody>
+
+            </tbody>
+            </thead>
+        </table>
+        <table id="table-names">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Salary</th>
+                </tr>
+            <tbody></tbody>
+            </thead>
+        </table>
+        <table>
+
+        </table>
+
+
+    </main>
+
+
+
+</body>
+
+</html>

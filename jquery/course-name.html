@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Course Name</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<script>
+
+    $(function () { 
+
+    //add Course Btn
+        $('#add-btn').on('click',function(){
+
+            var courseName  = $('#course-name').val();
+            $('#tb-course').append(' <tr><td>'+courseName+'</td><td><input type="button" class="edit-btn tb-btn" value="Edit"></td><td><input type="button" class="del-btn tb-btn" value="Delete"></td></tr>')
+            $('tr').css('border-bottom','1px dotted gray');
+        });
+        //del Btn
+        $('#tb-course').on('click','.del-btn',function(){
+
+             $(this).closest('tr').remove();
+            
+        });
+        $('#tb-course').on('click','.edit-btn',function () {
+            
+            $(this).val('Save');
+            $(this).removeClass('edit-btn');
+            $(this).addClass('save-btn');
+            var textValue = $(this).closest('tr').first().text();
+            $(this).parent().prev().replaceWith('<td><input type="text" value="'+textValue+'" </td>')
+           
+            
+        });
+        $('#tb-course').on('click','.save-btn',function () {
+           
+           $(this).val('edit');
+           $(this).removeClass('save-btn');
+           $(this).addClass('edit-btn');
+           var outPut = $(this).closest('tr').children().children().val();
+           $(this).parent().prev().replaceWith('<td>'+outPut+'</td>')
+       });
+
+        $('*').on('click','*',function () { 
+           
+            if( $(this).KeyboardEvent== 37)//move left
+                $(this).prev();
+
+            if($(this).keyup(39) )//move right
+                $(this).next(); 
+                
+            if($(this).KeyboardEvent== 38)//move Up
+                $(this).closest('tr').prev().children('nth-child(2)');
+            
+            if($(this).KeyboardEvent== 40)//Move Down
+                $(this).closest('tr').next().children('nth-child(2)');
+
+         })
+        
+
+
+
+     });
+
+
+</script>
+<style>
+    body{
+      margin: 50px;
+      left: 100px;
+    }
+  
+    *{
+        padding: 5px 10px;
+        margin: 10px;
+        font-family: 'Montserrat', sans-serif;
+
+    }
+    input[type='button']
+    {
+      cursor: pointer;  
+      background-color: rgb(241, 241, 241);
+      border-radius: 2px;
+      box-shadow: none;
+       border:1px solid rgb(182, 182, 182);  
+    }
+    input[type='button']:hover
+    {
+      background-color:  rgb(231, 231, 231);
+    }
+    table{
+        border: 1px solid rgb(179, 179, 179);
+        border-collapse: collapse;
+    }
+    thead{
+        border-bottom: 1px solid rgb(179, 179, 179);
+    }
+   thead tr{
+       border:none;
+   }
+   tbody tr{
+       border : 1px dotted rgb(197, 197, 197);
+   }
+  
+</style>
+
+    </head>
+    <body>
+        <label for="course-name">Course Name : </label><input type="text" id="course-name"></body>
+        <input type="button" value="Add Course" id="add-btn">
+    </br>
+    <table id="tb-course">
+
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Edit</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tb-course-name">MCSD</td><td><input type="button" class="edit-btn tb-btn" value="Edit"></td><td><input type="button" class="del-btn tb-btn" value="Delete"></td>
+                </tr>
+            </tbody>
+    </table>
+        
+    </body>
+</html>

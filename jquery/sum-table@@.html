@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Total Numbers</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+           $(function() {
+
+
+            $('#btn-add').on('click',function () { 
+
+                    var newNumber = $('#number').val();
+                    $('#table-number').append('<tr><td class="row-number">'+newNumber+'</td> <td><input type="button" class="btn-edit" value="Edit" /></td></tr>');
+
+                });
+             
+                 
+               
+            });
+           
+        </script>
+        <style>
+
+            *{
+                padding: 5px 10px;
+                margin: 10px;
+            }
+
+            table th{
+                font-family: 'Montserrat', sans-serif;
+                font-size: 1em ;
+                font-weight: bold;
+            }
+            tr:nth-child(even) {
+                background-color: #1b90f7;
+
+            }
+            
+            table,  td {
+                border-top: 1px solid #8ca5cc;
+                border-bottom: 1px solid #8ca5cc;
+                border-left: 1px dotted #8ca5cc;
+                border-right: 1px dotted #8ca5cc;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            
+            th, td{
+                transition: .2s linear;
+                padding: 5px 10px;
+            }
+            td:hover{
+                background-color: #92befc;
+                transition-duration: 0ms;
+                
+            }
+
+
+        </style>
+    </head>
+
+<body>
+    <main>
+        <section>
+
+        </section>
+        <label >Number : </label>
+        <input type="number" id="number" style="display:inline;"><input type="button" id="btn-add" value="Add">
+        <table id="table-number">
+            <thead>
+                <tr>
+                    <td>Number</td>
+                    <td>Edit Number</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                   <td class="row-number">10</td> 
+                   <td><input type="button" class="btn-edit" value="Edit"/></td>
+                </tr>
+               
+            </tbody>
+            <tfoot>
+                <tr >
+                    <td id="total-numbers"></td>
+                    <td>Total Numbers</td>
+                </tr>
+            </tfoot>
+        </table>
+        <span id="coords"> </span>
+    </main>
+    <script>
+        $(document).on("mousemove",function(e){
+
+            $('#coords').html('Coords'+' : ' + 'Y : ' + e.clientY + ' X : ' + e.clientX);
+
+        });
+
+        
+        
+    </script>
+</body>
+</html>

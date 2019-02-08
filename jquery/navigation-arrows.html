@@ -1,0 +1,104 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="~/Models/photo/IMG_20190201_215326_803.jpg" />
+    <title>Index</title>
+    <style>
+        .c{
+           color:red;
+           background-color:blue;
+       }
+   </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+
+
+
+           $(function () {
+
+           
+                
+            $("table").on('keyup','.a',function(e){
+            if(e.keyCode==37)
+               {
+                   $(this).parent().prev().find("input").focus()
+               }
+               if(e.keyCode==39)
+               {
+                 $(this).parent().next().find("input").focus();
+               }
+               if(e.keyCode==38)
+               {
+                   var tdindex = $(this).parent().index()
+                   $(this).closest('tr').prev().children().eq(tdindex).find("input").focus()
+               }
+               if(e.keyCode==40)
+               {
+                   var tdindex = $(this).parent().index()
+                   $(this).closest('tr').next().children().eq(tdindex).find("input").focus()
+               }
+        }); 
+
+
+
+
+
+      
+           
+           
+       });
+
+       
+
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+            <td><input type="text" class="a" /></td>
+        </tr>
+    </table>
+</body>
+
+</html>

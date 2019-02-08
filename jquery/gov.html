@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>.....</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+<style>
+        body{
+            margin: 50px;
+            left: 100px;
+          }
+        
+          *{
+              padding: 5px 10px;
+              margin: 10px;
+              font-family: 'Montserrat', sans-serif;
+      
+          }
+          #data-entery{
+              width: max-content;
+              height: max-content;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid rgb(112, 112, 112);
+          }
+          #data-entery input{
+            width: max-content;
+          }
+         
+          
+          input[type='button']
+          {
+            cursor: pointer;  
+            background-color: rgb(241, 241, 241);
+            border-radius: 2px;
+            box-shadow: none;
+             border:1px solid rgb(182, 182, 182);  
+          }
+          input[type='button']:hover
+          {
+            background-color:  rgb(231, 231, 231);
+          }
+          table{
+              padding: 5px 10px;
+              margin: 20px;
+              border: 1px solid rgb(179, 179, 179);
+              border-collapse: collapse;
+          }
+          thead{
+              border-bottom: 1px solid rgb(179, 179, 179);
+          }
+         thead tr{
+             border:none;
+         }
+         tbody tr{
+             border : 1px dotted rgb(197, 197, 197);
+         }
+         main{
+             display: grid;
+             grid-template-columns: repeat(3fr);
+             justify-content:space-between  ;
+             
+         }
+
+         form{
+             grid-column: 1/2;
+         }
+         #table-gov{
+             grid-column: 2/3;
+         }
+         #table-center{
+             grid-column: 3/4;
+         }
+        
+</style>
+<script>
+
+    $(function(){
+
+       
+               $.ajax({
+                    method:'post',
+                    dataType:'xml',
+                    url:'http://clsapi.azurewebsites.net/api/gov',
+                    success:function(result){
+                        
+                        $('GovernorateName').each(function (i,e) {
+                            alert($(e).text());
+                        })
+                        
+                        
+                    }
+               });
+
+            
+
+      
+             
+       
+    });
+
+</script>
+    </head>
+    <body>
+        <main>
+                <form id="selection">
+                        <select id="gov">
+                           <option>Country</option>
+                        </select>
+                        <select id="center">
+                                <option value="">Center</option>
+                        </select>
+                        <select id="vaillage">
+                                <option value="">Vaillage</option>
+                        </select>
+                        
+                    </form>
+            
+                    <table id="table-gov">
+                        <thead>
+                            <tr>
+                                <th>Id</th><th>Goverment</th><th>Select</th>
+                            </tr>
+                            <tbody>
+                            </tbody>
+                        </thead>
+                    </table>
+                    
+                    <table id="table-center">
+                            <thead>
+                                <tr>
+                                    <th>Id</th><th>Center</th>
+                                </tr>
+                                <tbody>
+                                </tbody>
+                            </thead>
+                    </table>
+
+        </main>
+       
+            
+    </body>
+</html>

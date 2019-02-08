@@ -1,0 +1,68 @@
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+
+
+            $.ajax({
+
+                url: "http://clsapi.azurewebsites.net/api/gov",
+                success: function (res) {
+
+                    $.each(res, function (i, r) {
+                        $("#govList").append('<option value="' + r.Id + '">' + r.GovernorateName + '</option>');
+                    });
+
+                }
+
+            });
+
+
+
+            $("#govList").change(function () {
+                var id = $("#govList").val();
+                $("#centerList").empty();
+                $.ajax({
+
+                    url: "http://clsapi.azurewebsites.net/api/center",
+                    data: { govid: id },
+                    success: function (res) {
+
+                        $.each(res, function (i, r) {
+                            $("#centerList").append('<option value="' + r.Id + '">' + r.CenterName + '</option>');
+                        });
+
+                    }
+
+                });
+
+            });
+
+
+
+        });
+    </script>
+</head>
+<body>
+    
+
+    Gov:<select id="govList">
+            <option value="0">Select Gov</option>
+    
+         </select>
+    <br />
+     Center <select id="centerList">
+        <option value="0">Select Center</option>
+
+    </select>
+
+</body>
+</html>

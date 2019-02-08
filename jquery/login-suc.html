@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>lgin Success</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+        $(function () {
+            
+            var textBox = $('tr input[type="text"');
+
+            textBox.focus(function () { 
+                var helpId = $(this).attr('id') + 'Help';
+                $('#'+helpId).load('abc.html '+helpId+'');
+
+             });
+
+
+        });
+</script>
+    </head>
+    <body>
+        <h1 style="margin:0 auto;">
+            Welcome Login Success!!
+        </h1>
+
+       
+       
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td ><input type="text" id="firstName"/></td>
+                <td id="firstNameHelp"></td>
+            </tr>
+            <tr>
+                    <td>Last Name</td>
+                    <td><input type="text" id="lastName"/></td>
+                    <td id="lastNameHelp"></td>
+
+            </tr>
+            <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="email"/></td>
+                    <td><div id="emailHelp"></div></td>
+            </tr>
+        </table>
+    </body>
+</html>
