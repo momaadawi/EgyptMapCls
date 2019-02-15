@@ -1,0 +1,43 @@
+Headlines:
+  1-  review
+  2- storge
+  3- file
+  ------------------------------------------------------------
+  ______click btn to dsiplay multiplication table for enterd number 
+  ______ https://www.w3.org/2002/09/tests/keys-cancel2.html?
+    <script>
+        $(function () {
+
+           
+
+            $('#btn-display').click(function () {
+                $('#values').empty();
+
+                var num = $('#number').val();
+
+                for (var i = 1; i < 13; i++) {
+                    $('#values').append('' + i + ' * ' + num + ' = ' + num * i + ' ')
+                    $('#values').append('<hr/>')
+
+                }
+
+
+            });
+
+            $('#number').on('keyup',function(e) {
+
+                if (e.keycode == 13) {
+                    $('#btn-display').click();
+                }
+            });
+
+        });
+        -----------------------------------------------
+        _____disabe context menu (right click)
+        $(document).contextmenu(function(){
+          return false;
+        });
+        ------------------------------------------------
+        search for [POV],[SLA].
+        ------------------------------------------------
+        
