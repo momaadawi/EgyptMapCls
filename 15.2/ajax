@@ -1,0 +1,33 @@
+//http://clsapi.azurewebsites.net/api/gov
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>aja</title>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script>
+        $(function () {
+
+            $.ajax({
+                url: 'http://clsapi.azurewebsites.net/api/gov',
+                success: function (res) {
+                    $.each(res, function (i, e) {
+
+                        $('#gov-selc').append('<option value="' + e.Id + '">' + e.GovernorateName + '</option>')
+                    })
+                }
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+  <select id="gov-selc">
+      <option value="0">Goverments</option>
+  </select>
+</body>
+</html>
