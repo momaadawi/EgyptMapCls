@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("#tb").hide(); // when the start program appears the table is hide
+            // Add variable (name-basic-bouns-deduction) in table
+            $("#add-btn").on('click', function () {
+                $("#tb").show(); // when push the click button add the table is show
+                var nameText = $("#name-text").val();
+                var basicText = $("#basic-text").val();
+                var bounsText = $("#bouns-text").val();
+                var deductionText = $("#deduction-text").val();
+                var totalText = parseInt(basicText) + parseInt(bounsText) - parseInt(deductionText);
+                    $("#tb tbody").append("<tr><td class='name-display'>" + nameText + "</td><td class='basic'>" + basicText + "</td><td class='bouns'>" + bounsText + "</td><td class='deduction'>" + deductionText + "</td><td class='total'>" + totalText + "</td><td><input type='button' value='Edit' class='edit-btn' /></td><td><input type='button' value='Remove' class='remove-btn' /></td></tr>");
+                    $("tr").css('border-bottom', '1px dotted gray')
+                // use function from down
+                $(".basic").keyup();
+                $(".bouns").keyup();
+                $(".deduction").keyup();
+                $(".total").keyup();
+            });
+
+
+            // Remove the row
+            $("#tb").on('click', '.remove-btn', function () {
+                var trcount = $(this).closest('tbody')[0].childElementCount;
+                if (trcount > 0) {
+                    $(this).closest('tr').remove();
+                    // condition
+                    trcount == 1 ? trcount-- : trcount;
+                    // when trcount or row Equal 0 , Empty tfoot
+                    if (trcount == 0) {
+                        $("#total-basic")[0].innerText = "";
+                        $("#total-bouns")[0].innerText = "";
+                        $("#total-deduction")[0].innerText = "";
+                        $("#total")[0].innerText = "";
+                    }
+                }
+               // use function from down
+                $(".basic").keyup();
+                $(".bouns").keyup();
+                $(".deduction").keyup();
+                $(".total").keyup();
+            });
+
+
+            // Edit the row (Basic-Bouns-Deduction) and change name button Edit to Save
+            $("#tb").on('click', '.edit-btn', function () {
+                $(this).val('Save');
+                $(this).removeClass('edit-btn');
+                $(this).addClass('save-btn');
+                var oldBasic = $(this).closest('tr').children('td:nth-child(2)').text();
+                $(this).closest('tr').children('td:nth-child(2)').replaceWith("<td><input type='text' value='" + oldBasic + "' class='basic'/></td>")
+                var oldBouns = $(this).closest('tr').children('td:nth-child(3)').text();
+                $(this).closest('tr').children('td:nth-child(3)').replaceWith("<td><input type='text' value='" + oldBouns + "' class='bouns'/></td>")
+                var oldDeduction = $(this).closest('tr').children('td:nth-child(4)').text();
+                $(this).closest('tr').children('td:nth-child(4)').replaceWith("<td><input type='text'value='" + oldDeduction + "' class='deduction'/ ></td>")
+            });
+
+
+            // Save variable in row (Basic-Bouns-Deduction) and change name button Save to Edit
+            $("#tb").on('click', '.save-btn', function () {
+                $(this).val('Edit');
+                $(this).removeClass('save-btn');
+                $(this).addClass('edit-btn');
+                var newBasic = $(this).closest('tr').children('td:nth-child(2)').find("input").val();
+                $(this).closest('tr').children('td:nth-child(2)').replaceWith("<td class='basic'>" + newBasic + "</td>")
+                var newBouns = $(this).closest('tr').children('td:nth-child(3)').find("input").val();
+                $(this).closest('tr').children('td:nth-child(3)').replaceWith("<td class='bouns'>" + newBouns + "</td>")
+                var newDeduction = $(this).closest('tr').children('td:nth-child(4)').find("input").val();
+                $(this).closest('tr').children('td:nth-child(4)').replaceWith("<td class='deduction'>" + newDeduction + "</td>")
+            });
+
+
+
+            $("#tb").on('keyup', '.basic', function () {
+                //Sum basic in row total
+                var rowBasic = $(this).closest('tr').children('td:nth-child(2)').find("input").val();
+
+                if (rowBasic == "undefinde" || rowBasic == "") // condition if basic equal empty or NAN = 0 in row
+                    rowBasic = 0;
+
+                var rowBouns = $(this).closest('tr').children('td:nth-child(3)').find("input").val();
+
+                if (rowBouns == "undefinde" || rowBouns == "")  // condition if bouns equal empty or NAN = 0 in row
+                    rowBouns = 0
+
+                var rowDeduction = $(this).closest('tr').children('td:nth-child(4)').find("input").val();
+
+                if (rowDeduction == "undefinde" || rowDeduction == "")  // condition if deduction equal empty or NAN = 0 in row
+                    rowDeduction = 0
+
+                var rowTotal = parseInt(rowBasic) + parseInt(rowBouns) - parseInt(rowDeduction);
+
+                // Sum basic in case text or val in row
+                if ($(".basic").is("input") == true)
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').text(rowTotal);
+                }
+                else
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').val(rowTotal);
+                }
+
+                //Sum total basic in colum basic in tfoot
+                var Basic = 0;
+                $.each($('.basic'), function (i, e) {
+                    if ($(e).is('input') == true) // Sum basic in case text or val in colum
+                    {
+                        var basic = $(e).val();
+                        if (basic == "") // condition if basic equal empty or NAN = 0 in colum
+                            basic = 0;
+                        Basic = Basic + parseInt(basic);
+                    }
+                    else
+                    {
+                        var basic = $(e).text();
+                        if (basic == "")
+                            basic = 0;
+                        Basic = Basic + parseInt(basic);
+                    }
+                })
+                $("#total-basic").text(Basic);
+                // condition if (Basic >= 10000) color = aqua , else = red
+                if(Basic >= 10000)
+                {
+                 $("#total-basic").attr("class","aqua")
+                }
+                else
+                {
+                    $("#total-basic").removeAttr("class")
+                    $("#total-basic").attr("class","red")
+                }
+                $(".total").keyup();
+            });
+
+
+
+
+
+
+
+
+            $("#tb").on('keyup', '.bouns', function () {
+                //Sum bouns in row total
+                var rowBasic = $(this).closest('tr').children('td:nth-child(2)').find("input").val();
+
+                if (rowBasic == "undefinde" || rowBasic == "") // condition if basic equal empty or NAN = 0 in row
+                    rowBasic = 0;
+
+                var rowBouns = $(this).closest('tr').children('td:nth-child(3)').find("input").val();
+
+                if (rowBouns == "undefinde" || rowBouns == "") // condition if bouns equal empty or NAN = 0 in row
+                    rowBouns = 0;
+
+                var rowDeduction = $(this).closest('tr').children('td:nth-child(4)').find("input").val();
+
+                if (rowDeduction == "undefinde" || rowDeduction == "") // condition if deduction equal empty or NAN = 0 in row
+                    rowDeduction = 0;
+
+                var rowTotal = parseInt(rowBasic) + parseInt(rowBouns) - parseInt(rowDeduction);
+
+                // Sum basic in case text or val in row
+                if ($(".basic").is("input") == true)
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').text(rowTotal);
+                }
+                else
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').val(rowTotal);
+                }
+
+                //Sum total bouns in colum bouns in tfoot
+                var Bouns = 0;
+                $.each($('.bouns'), function (i, e) {
+                    if ($(e).is('input') == true) // Sum bouns in case text or val in colum
+                    {
+                        var bouns = $(e).val(); // condition if bouns equal empty or NAN = 0 in colum
+                        if (bouns == "")
+                            bouns = 0;
+                        Bouns = Bouns + parseInt(bouns);
+                    }
+                    else
+                    {
+                        var bouns = $(e).text();
+                        if (bouns == "")
+                            bouns = 0;
+                        Bouns = Bouns + parseInt(bouns);
+                    }
+                })
+                $("#total-bouns").text(Bouns);
+                // condition if (Bouns >= 2000) color = aqua , else = red
+                if (Bouns >= 2000)
+                {
+                    $("#total-bouns").attr("class", "aqua")
+                }
+                else
+                {
+                    $("#total-bouns").removeAttr("class")
+                    $("#total-bouns").attr("class", "red")
+                }
+                $(".total").keyup();
+            });
+
+
+
+            $("#tb").on('keyup', '.deduction', function () {
+                //Sum deduction in row total
+                var rowBasic = $(this).closest('tr').children('td:nth-child(2)').find("input").val();
+
+                if (rowBasic == "undefinde" || rowBasic == "") // condition if basic equal empty or NAN = 0 in row
+                    rowBasic = 0;
+
+                var rowBouns = $(this).closest('tr').children('td:nth-child(3)').find("input").val();
+
+                if (rowBouns == "undefinde" || rowBouns == "") // condition if bouns equal empty or NAN = 0 in row
+                    rowBouns = 0;
+
+                var rowDeduction = $(this).closest('tr').children('td:nth-child(4)').find("input").val();
+
+                if (rowDeduction == "undefinde" || rowDeduction == "") // condition if deduction equal empty or NAN = 0 in row
+                    rowDeduction = 0;
+
+                var rowTotal = parseInt(rowBasic) + parseInt(rowBouns) - parseInt(rowDeduction);
+                // Sum deduction in case text or val in row
+                if ($(".deduction").is("input") == true)
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').text(rowTotal);
+                }
+                else
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').val(rowTotal);
+                }
+
+                //Sum total deduction in colum bouns in tfoot
+                var Deduction = 0;
+                $.each($('.deduction'), function (i, e) {
+                    if ($(e).is('input') == true) // Sum deduction in case text or val in colum
+                    {
+                        var deduction = $(e).val();
+                        if (deduction == "") // condition if deduction equal empty or NAN = 0 in colum
+                            deduction = 0;
+                        Deduction = Deduction + parseInt(deduction);
+                    }
+                    else
+                    {
+                        var deduction = $(e).text();
+                        if (deduction == "")
+                            deduction = 0;
+                        Deduction = Deduction + parseInt(deduction);
+                    }
+                })
+                $("#total-deduction").text(Deduction);
+                // condition if (Deduction >= 1000) color = aqua , else = red
+                if (Deduction >= 1000)
+                {
+                    $("#total-deduction").attr("class", "aqua")
+                }
+                else
+                {
+                    $("#total-deduction").removeAttr("class")
+                    $("#total-deduction").attr("class", "red")
+                }
+                $(".total").keyup();
+            });
+
+
+
+            $("#tb").on('keyup', '.total', function () {
+                //Sum total in row total
+                var rowBasic = $(this).closest('tr').children('td:nth-child(2)').find("input").val();
+
+                if (rowBasic == "undefinde" || rowBasic == "") // condition if basic equal empty or NAN = 0 in row
+                    rowBasic = 0;
+
+                var rowBouns = $(this).closest('tr').children('td:nth-child(3)').find("input").val();
+
+                if (rowBouns == "undefinde" || rowBouns == "") // condition if bouns equal empty or NAN = 0 in row
+                    rowBouns = 0;
+
+                var rowDeduction = $(this).closest('tr').children('td:nth-child(4)').find("input").val();
+
+                if (rowDeduction == "undefinde" || rowDeduction == "") // condition if deduction equal empty or NAN = 0 in row
+                    rowDeduction = 0;
+
+                var rowTotal = parseInt(rowBasic) + parseInt(rowBouns) - parseInt(rowDeduction);
+
+                if (rowTotal == "undefinde" || rowTotal == "") // condition if total equal empty or NAN = 0 in row
+                    rowTotal = 0;
+
+                // Sum total in case text or val in row
+                if ($(".total").is("input") == true)
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').text(rowTotal);
+                }
+                else
+                {
+                    $(this).closest('tr').children('td:nth-child(5)').val(rowTotal);
+                }
+
+
+                //Sum total total in colum total in tfoot
+                var Total = 0;
+                $.each($('.total'), function (i, e) {
+                    if ($(e).is('input') == true) // Sum total in case text or val in colum
+                    {
+                        var total = $(e).val();
+                        if (total == "") // condition if total equal empty or NAN = 0 in colum
+                            total = 0;
+                        Total = Total + parseInt(total);
+                    }
+                    else
+                    {
+                        var total = $(e).text();
+                        if (total == "")
+                            total = 0;
+                        Total = Total + parseInt(total);
+                    }
+                })
+
+                $("#total").text(Total);
+                // condition if (Total >= 15000) color = aqua , else = red
+                if (Total >= 15000)
+                {
+                    $("#total").attr("class", "aqua")
+                }
+                else
+                {
+                    $("#total").removeAttr("class")
+                    $("#total").attr("class", "red")
+                }
+            });
+
+
+            // when push the click button display is show name only in new table
+            $("#display-btn").on('click', function () {
+                $("#tb-display").empty();
+                $.each($(".name-display"), function (i,e) {
+                    $("#tb-display").append("<tr><td>" + $(e).text() + "</td></tr>")
+                })
+            });
+        });
+    </script>
+
+
+    <style>
+        body {
+            margin: 50px;
+            left: 100px;
+        }
+
+        * {
+            padding: 5px 20px;
+            margin: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        input[type='button'] {
+            cursor: pointer;
+            background-color: rgb(241, 241, 241);
+            border-radius: 2px;
+            box-shadow: none;
+            /*border: 1px solid rgb(182, 182, 182);*/
+        }
+
+            input[type='button']:hover {
+                background-color: rgb(231, 231, 231);
+            }
+
+        table {
+            border: 1px solid rgb(179, 179, 179);
+            border-collapse: collapse;
+        }
+
+        thead {
+            border-bottom: 1px solid rgb(179, 179, 179);
+        }
+
+            thead tr {
+                border: none;
+            }
+
+        tbody tr {
+            border: 1px dotted rgb(197, 197, 197);
+        }
+
+        .aqua {
+            color: aqua;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
+
+</head>
+<body>
+    <label for="name-text">Name:</label><input type="text" id="name-text" value="mohamed" /><br />
+    <label for="basic-text">Basic:</label><input type="text" id="basic-text" value="5000" /><br />
+    <label for="bouns-text">Bouns:</label><input type="text" id="bouns-text" value="3000" /><br />
+    <label for="deduction-text">Deduction:</label><input type="text" id="deduction-text" value="2000" /><br />
+    <input type="button" value="Add" id="add-btn" style="margin:5px 0px 0px 250px" />
+    <input type="button" value="Display" id="display-btn" />
+
+    <table id="tb" hidden>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Basic</th>
+                <th>bouns</th>
+                <th>Deduction</th>
+                <th>Total</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td id="total-basic"></td>
+                <td id="total-bouns"></td>
+                <td id="total-deduction"></td>
+                <td id="total"></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <table id="tb-display"></table>
+
+
+</body>
+</html>
