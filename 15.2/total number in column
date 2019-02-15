@@ -1,0 +1,21 @@
+$(function () {
+
+            $('btn').click(function () {
+
+                var total = 0;
+
+                $.each('.a', function (i, td) {
+
+                    if($(td).is('input'))
+                    {
+                        total = total + parseFloat( $(td).val()  )
+                    }
+                    else
+                    {
+                        total = total + parseFloat($(td).val())
+
+                    }
+
+                    $('#total').text(total)
+                });
+            });
