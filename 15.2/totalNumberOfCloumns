@@ -1,0 +1,63 @@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <style>
+        *{
+            padding:5px 10px;
+            margin:10px;
+        }
+    </style>
+    <script>
+        $(function () {
+
+            $('#btn').click(function () {
+
+                var total = 0;
+
+                $.each('.a', function (i, td) {
+
+                    if($(td).is('input'))
+                    {
+                        total = total + parseFloat($(td).val())
+                    }
+                    else
+                    {
+                        total = total + parseFloat($(td).text())
+
+                    }
+
+                });
+                $('#total').text(total)
+
+            });
+
+        });
+    </script>
+    <title>xxx</title>
+</head>
+<body>
+    
+    <table id="tb">
+        <thead><tr>number</tr></thead>
+        <tbody>
+            <tr><td class="a">10</td></tr>
+            <tr><td class="a">5</td></tr>
+            <tr><td><input type="text" class="a" /></td></tr>
+
+            <tr><td class="a">5</td></tr>
+
+        </tbody>
+        <tfoot><td id="total"></td></tfoot>
+    </table>
+    <input type="button" id="btn" value="total" />
+    
+</body>
+</html>
