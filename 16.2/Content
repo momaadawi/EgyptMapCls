@@ -1,0 +1,35 @@
+1- Form in Html
+2- DOM
+iquery 
+aiax 
+jason 
+query string
+longpolling
+bootstrap grid
+
+
+Head Lines :-
+  *HTML5
+  
+  admin dashboard temp :aminlte.io
+  
+  ***Geolocation
+  
+  --  getCurrentPosition >>> Browsers;
+  --  watchPostion >> Mobile App >> whenever position changed.get the new position.
+  
+  latlong.net
+  gooogle map API
+  ------------------------------
+  Signal R
+      Web Socket >> not suported on all browsres 
+      Longpolling
+      forever frame >> for IE
+      SSE >> serversent event >>> 
+  ----------------------------
+  web worker
+  -----------------------
+  (Search)
+  Thread >> based on Switching 
+  Task >> group of thread
+     
