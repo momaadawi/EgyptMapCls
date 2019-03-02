@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication4.MyDataBase;
+namespace WebApplication4.Controllers
+{
+    public class CountryController : Controller
+    {
+        // GET: Department
+        public ActionResult Index()
+        {
+            dbtestEntities db = new dbtestEntities();
+           ViewBag.x= db.Countries.Select(a => a).ToList();
+            return View();
+        }
+
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Country c1)
+        {
+            dbtestEntities db = new dbtestEntities();
+            db.Countries.Add(c1);
+            db.SaveChanges();
+
+            return Redirect("/Country/Index");
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            dbtestEntities db = new dbtestEntities();
+            var data = db.Countries.Find(Id);
+            ViewBag.Id = data.Id;
+            ViewBag.CountryName = data.CountryName;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Country c1)
+        {
+            dbtestEntities db = new dbtestEntities();
+            var old = db.Countries.Find(c1.Id);
+
+            old.CountryName = c1.CountryName;
+            db.SaveChanges();
+
+
+            return Redirect("/Country/Index");
+        }
+
+
+
+
+
+        public ActionResult Delete(int Id)
+        {
+            dbtestEntities db = new dbtestEntities();
+            var data = db.Countries.Find(Id);
+            ViewBag.Id = data.Id;
+            ViewBag.CountryName = data.CountryName;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Country c1)
+        {
+            dbtestEntities db = new dbtestEntities();
+            var old = db.Countries.Find(c1.Id);
+            db.Countries.Remove(old);
+            db.SaveChanges();
+
+
+            return Redirect("/Country/Index");
+        }
+
+
+
+
+
+    }
+}
