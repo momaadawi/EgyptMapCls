@@ -27,7 +27,59 @@
         3) in the conroller action create object from your db (hint : don't forger using namespace.folder that contaoin db )
             create viewBag to carry data from table 
                 ex : viewBag.x = folderofdb.table.select(a = > a).toList(); !!!!!!!! fo deep into Select funtion (google it)
-         4) in view create table into table use @foreach (item in viewBag.x){ @item.Id, @item.Name, @item.Salry}       
+        4) in view create table into table use @foreach (item in viewBag.x){ @item.Id, @item.Name, @item.Salry}       
 
- 
+                               ex : public class EmployeesController : Controller
+                                  {
+                                      // GET: Employees
+                                      public ActionResult Index()
+                                      {
+
+                                          CompanyDbContext company = new CompanyDbContext();
+                                          ViewBag.x = company.Employees.Select(a => a).ToList();   
+                                          return View();
+                                      }
+
+                                      public ActionResult Create() {
+
+
+                                          return View();
+                                      }
+                                      [HttpPost]
+                                      public ActionResult Create(Employee e)
+                                      {
+                                          CompanyDbContext company = new CompanyDbContext();
+                                          company.Employees.Add(e);
+                                          company.SaveChanges();
+                                          return Redirect("/Employees/Table");
+                                      }
+
+                                      public ActionResult Table()
+                                      {
+
+                                          CompanyDbContext table = new CompanyDbContext();
+                                          ViewBag.x = table.Employees.Select(a => a).ToList();
+
+                                          return View();
+                                      }
+
+                                  }
+
+                                  ************html
+                                  <body>
+                                  <form method="post" action="Create">
+                                      <input type="text" name="Name" />
+                                      <input type="text" name="Salary"/>
+                                      <input type="submit" value="add"/>
+                                  </form>
+                              </body>
   
+-----------------------------------------------
+SEN
+      1) CREATE DB
+      2) Import DB into Folder in Project
+      3) Create Controller as Table Name with Edit Btn
+      4) Into Controller Create ActionResult with view preview Table Data and Edit btn redirect to Edit ActionR Edit, and Hidden input get ID
+      5) Create ActionResult For Edit, view >> get id from query string from last Action
+      
+      
