@@ -1,0 +1,33 @@
+1- intro to mvc
+2- passing data to view
+3- passing data to action 
+4- CRUD EF
+5- HTML Helper
+--------------------------------------------------------------
+2,3-  passing data to view and action
+      Q) diffrence between ViewBag[] & viewData.<>
+      viewData[""]>> object >> mvc1,2 need casting: ex> viewData.x as list<namesapce.db.class name >
+      viewBag. >> dynamic >> mvc3 >> most used & prefered 
+
+      (write viewBag.<variable name > into controller function >>> call it into view as razor syntax ex: @viewBag.<variable name>)
+      ---------------------
+      Create Class with Customer prop id,name,salary >> create controller with it's name contain action for get data from user, 
+      action save data into class customer redirect to action preview welcome view 
+      ---------------------
+      **Custom ERROR
+        into web.config >>>system.web>>
+        <customErrors mode="on/off/remoteonly">
+          <error statusCode="number" redirect="controller/action"/>
+        </customErrors>
+-------------------------------------------------------------------------------------------------------------------
+4- CRUD EF
+  EX : retrieve Data FROM DB
+        1) create db and table contain data 
+        2) In project Create floder for db and add add.net file will it will create directly Model for DB 
+        3) in the conroller action create object from your db (hint : don't forger using namespace.folder that contaoin db )
+            create viewBag to carry data from table 
+                ex : viewBag.x = folderofdb.table.select(a = > a).toList(); !!!!!!!! fo deep into Select funtion (google it)
+         4) in view create table into table use @foreach (item in viewBag.x){ @item.Id, @item.Name, @item.Salry}       
+
+ 
+  
