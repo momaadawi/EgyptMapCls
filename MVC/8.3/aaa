@@ -5,3 +5,14 @@
 5 - state mangement
 -----------------------------------------------------------------------------------------
 * TempData["x"]
+https://blogs.msdn.microsoft.com/aspnetue/2010/09/17/best-practices-for-asp-net-mvc/
+https://code.msdn.microsoft.com/How-to-create-and-access-447ada98
+https://www.c-sharpcorner.com/article/state-management-in-asp-net-mvc/
+-----------------------------------------------------
+1) Area
+      link : https://dzone.com/articles/areas-in-aspnet-mvc
+ 2) partial View
+    @Html.Partial("URL") >> return sttring >> read all Lines Then Print >>MVC1.2
+    @{Html.RenderParial("URL");<Don't forger ";">} return VOID >> read line then pring(LINE BY LINE) >> MVC3 (better for PERFORMANCE)
+    ----------------------------------------------------------------
+    
